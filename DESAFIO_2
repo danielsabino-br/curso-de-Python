@@ -1,0 +1,36 @@
+#banco de dados - DESAFIO 2
+usuario_senha = {
+    "ana": "2598",
+    "bia":"2314",
+    "dani":"4582"
+}
+#inicio do  programa
+print("=====SISTEMA DE LOGIN===")
+
+acao = input("Você deseja (1) Login ou (2) Cadastro:  ")
+
+if acao =="1":
+
+    #LOGIN
+    nome = input("Digite o nome do usuaro: "). strip().lower()
+    senha = input("Digite a senha: ").strip()
+
+    if nome in usuario_senha:
+        if usuario_senha[nome] == senha:
+            print("login realizado com sucesso. ")
+        else:
+            print("Senha icorreta, tente novamente.")
+    else:
+        print("usuario não encontrado. ")
+
+elif acao =="2":
+    #Cadastro
+    novo_nome = input("Escolha um nome de usuario: ").strip().lower()
+    if novo_nome in usuario_senha:
+        print("Esse ussuario já existe!")
+    else:
+        nova_senha = input("Digite uma senha: ").strip()
+        usuario_senha[novo_nome] = nova_senha
+        print("Usuario cadastrado com sucesso!")
+else:
+    print("Opção invalida.")
