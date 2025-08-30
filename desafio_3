@@ -1,1 +1,120 @@
+# usuários do sistema
+usuarios = {
+    "admin": "1111",
+    "Daniel": "6589",
+    "Paula": "8955",
+    "Carlos": "6677"
+}
+
+# Lista para armazenar clientes
+clientes = []
+
+# login
+nome = input("Digite o nome do usuário: ").strip()
+senha = input("Digite a senha: ").strip()
+
+if nome in usuarios and usuarios[nome] == senha:
+    print(f"Bem-vindo, {nome}!")
+
+    # menu principal
+    while True:
+        print("\n --- MENU ---")
+        print("1. Cadastrar cliente")
+        print("2. Relatório de clientes")
+        print("3. Buscar cliente")
+        print("4. Excluir cliente")
+        print("5. Editar cliente")
+        print("6. Sair")  # <- agora por último
+
+        opcao = input("Escolha uma opção: ").strip()
+
+        # adicionar cliente
+        if opcao == "1":
+            print("\n --- Cadastro de Cliente ---")
+            nome_cliente = input("Nome: ").strip()
+            telefone = input("Telefone: ").strip()
+            email = input("Email: ").strip()
+
+            cliente = {
+                "nome": nome_cliente,
+                "telefone": telefone,
+                "email": email
+            }
+
+            clientes.append(cliente)
+            print(f"Cliente {nome_cliente} adicionado com sucesso!")
+
+        # relatório
+        elif opcao == "2":
+            print("\n --- Relatório de Clientes ---")
+            total = len(clientes)
+            print(f"Total: {total} cliente(s)")
+
+            if total > 0:
+                for c in clientes:
+                    print(f"- {c['nome']}")
+
+        # buscar cliente
+        elif opcao == "3":
+            print("\n--- Buscar Cliente ---")
+            nome_busca = input("Digite o nome do cliente: ").strip()
+
+            encontrado = False
+            for c in clientes:
+                if c["nome"].lower() == nome_busca.lower():
+                    print("Cliente encontrado!")
+                    print(f"Nome: {c['nome']}, Telefone: {c['telefone']}, Email: {c['email']}")
+                    encontrado = True
+                    break
+
+            if not encontrado:
+                print("Cliente não encontrado.")
+
+        # excluir cliente
+        elif opcao == "4":
+            print("\n--- Excluir Cliente ---")
+            nome_excluir = input("Digite o nome do cliente a excluir: ").strip()
+
+            encontrado = False
+            for c in clientes:
+                if c["nome"].lower() == nome_excluir.lower():
+                    clientes.remove(c)
+                    print(f"Cliente {c['nome']} removido com sucesso!")
+                    encontrado = True
+                    break
+
+            if not encontrado:
+                print("Cliente não encontrado.")
+
+        # editar cliente
+        elif opcao == "5":
+            print("\n--- Editar Cliente ---")
+            nome_editar = input("Digite o nome do cliente a editar: ").strip()
+
+            encontrado = False
+            for c in clientes:
+                if c["nome"].lower() == nome_editar.lower():
+                    print(f"Editando cliente: {c['nome']}")
+                    novo_tel = input("Novo telefone: ").strip()
+                    novo_email = input("Novo email: ").strip()
+
+                    c["telefone"] = novo_tel
+                    c["email"] = novo_email
+                    print("Dados atualizados com sucesso!")
+                    encontrado = True
+                    break
+
+            if not encontrado:
+                print("Cliente não encontrado.")
+
+        # sair
+        elif opcao == "6":
+            print("Saindo do sistema...")
+            break
+
+        else:
+            print("Opção inválida, tente novamente.")
+
+else:
+    print("Usuário ou senha inválida")
 
